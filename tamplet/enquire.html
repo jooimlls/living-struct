@@ -1,0 +1,439 @@
+{% include 'header.html' %}
+<style>
+    /* For demo content below header */
+    .hero {
+        margin-top: 100px;
+        padding: 40px;
+        text-align: center;
+        background: #f9f9f9;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Inter', 'Segoe UI', sans-serif;
+        line-height: 1.6;
+        color: #333;
+    }
+
+    .hero-section {
+        background: linear-gradient(135deg, #dddd5fff 0%, #2a5298 100%);
+        color: white;
+        padding: 80px 20px;
+        text-align: center;
+        padding-top: 140px;
+    }
+
+    .hero-section h1 {
+        font-size: 48px;
+        margin-bottom: 20px;
+        font-weight: 700;
+    }
+
+    .hero-section p {
+        font-size: 20px;
+        max-width: 700px;
+        margin: 0 auto 30px;
+        opacity: 0.95;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 60px 20px;
+    }
+
+    .intro-section {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    .intro-section h2 {
+        font-size: 36px;
+        color: #5b364a;
+        margin-bottom: 20px;
+    }
+
+    .intro-section p {
+        font-size: 18px;
+        color: #666;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        margin: 60px 0;
+    }
+
+    .benefit-card {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .benefit-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .benefit-icon {
+        font-size: 48px;
+        margin-bottom: 15px;
+    }
+
+    .benefit-card h3 {
+        color: #5b364a;
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
+    .benefit-card p {
+        color: #666;
+        font-size: 15px;
+    }
+
+    .cta-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 60px 30px;
+        border-radius: 20px;
+        text-align: center;
+        margin: 60px 0;
+    }
+
+    .cta-section h2 {
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+
+    .cta-section p {
+        font-size: 18px;
+        margin-bottom: 30px;
+        opacity: 0.95;
+    }
+
+    .cta-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        padding: 15px 40px;
+        border-radius: 50px;
+        font-size: 16px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s;
+        border: 2px solid white;
+        display: inline-block;
+    }
+
+    .btn-primary {
+        background: white;
+        color: #5b364a;
+    }
+
+    .btn-primary:hover {
+        background: transparent;
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+        background: transparent;
+        color: white;
+    }
+
+    .btn-secondary:hover {
+        background: white;
+        color: #5b364a;
+        transform: translateY(-2px);
+    }
+
+    .how-it-works {
+        padding: 60px 0;
+    }
+
+    .how-it-works h2 {
+        text-align: center;
+        font-size: 36px;
+        color: #5b364a;
+        margin-bottom: 50px;
+    }
+
+    .steps {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 40px;
+    }
+
+    .step {
+        text-align: center;
+        position: relative;
+    }
+
+    .step-number {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        font-weight: 700;
+        margin: 0 auto 20px;
+    }
+
+    .step h3 {
+        color: #5b364a;
+        margin-bottom: 10px;
+        font-size: 20px;
+    }
+
+    .step p {
+        color: #666;
+        font-size: 15px;
+    }
+
+    .contact-info-section {
+        background: #f8f9fa;
+        padding: 60px 30px;
+        border-radius: 20px;
+        text-align: center;
+        margin-top: 60px;
+    }
+
+    .contact-info-section h2 {
+        font-size: 32px;
+        color: #5b364a;
+        margin-bottom: 15px;
+    }
+
+    .contact-info-section p {
+        color: #666;
+        margin-bottom: 30px;
+        font-size: 16px;
+    }
+
+    .contact-details {
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+        flex-wrap: wrap;
+        margin-top: 30px;
+    }
+
+    .contact-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .contact-item-icon {
+        font-size: 32px;
+    }
+
+    .contact-item a {
+        color: #5b364a;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 18px;
+    }
+
+    .contact-item a:hover {
+        text-decoration: underline;
+    }
+
+    .testimonial-section {
+        padding: 60px 0;
+        text-align: center;
+    }
+
+    .testimonial-section h2 {
+        font-size: 36px;
+        color: #5b364a;
+        margin-bottom: 50px;
+    }
+
+    .testimonials {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+    }
+
+    .testimonial {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .testimonial-text {
+        font-style: italic;
+        color: #666;
+        margin-bottom: 20px;
+        font-size: 15px;
+    }
+
+    .testimonial-author {
+        font-weight: 600;
+        color: #1e3c72;
+    }
+
+    .stars {
+        color: #ffc107;
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    @media (max-width: 768px) {
+        .hero-section h1 {
+            font-size: 32px;
+        }
+
+        .hero-section p {
+            font-size: 16px;
+        }
+
+        .intro-section h2,
+        .how-it-works h2,
+        .testimonial-section h2 {
+            font-size: 28px;
+        }
+
+        .cta-section h2 {
+            font-size: 28px;
+        }
+
+        .contact-details {
+            gap: 30px;
+        }
+    }
+</style>
+
+<!-------------------------------- Main Content of the Page ---------------------------------------->
+<div class="hero-section">
+    <h1>{{ hero.title }}</h1>
+    <p>{{ hero.subtitle }}</p>
+</div>
+
+<div class="container">
+    <div class="intro-section">
+        <h2>{{ intro.heading }}</h2>
+        <p>{{ intro.description }}</p>
+    </div>
+
+
+    <div class="benefits-grid">
+        {% for benefit in benefits %}
+        <div class="benefit-card">
+            <div class="benefit-icon">{{ benefit.icon }}</div>
+            <h3>{{ benefit.title }}</h3>
+            <p>{{ benefit.description }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="cta-section">
+        <h2>Let's Find Your Perfect Home</h2>
+        <p>Have questions? We're here to help! Our property experts are ready to assist you with personalized
+            recommendations and exclusive listings. Give a Request Call by clicking on Given Bellow button</p>
+        <div class="cta-buttons">
+            <a href="#signup" class="btn btn-primary" onclick="openPopup()">Get Started Now</a>
+            {% comment %} <a href="tel:+918375933621" class="btn btn-secondary">Call Us Today</a> {% endcomment %}
+        </div>
+    </div>
+
+    <div class="how-it-works">
+        <h2>How It Works</h2>
+        <div class="steps">
+            {% for step in steps %}
+            <div class="step">
+                <div class="step-number">{{ step.step_number }}</div>
+                <h3>{{ step.title }}</h3>
+                <p>{{ step.description }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% comment %} <div class="testimonial-section">
+        <h2>What Our Clients Say</h2>
+        <div class="testimonials">
+            <div class="testimonial">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"Excellent service! They helped me find my dream apartment within my budget.
+                    The team was professional and responsive throughout."</p>
+                <p class="testimonial-author">- Priya Sharma</p>
+            </div>
+
+            <div class="testimonial">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"Sold my property in just 3 weeks! Their market knowledge and negotiation
+                    skills are outstanding."</p>
+                <p class="testimonial-author">- Rahul Mehta</p>
+            </div>
+
+            <div class="testimonial">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"Great experience from start to finish. They made the entire home-buying
+                    process smooth and stress-free."</p>
+                <p class="testimonial-author">- Anjali Patel</p>
+            </div>
+        </div>
+    </div> {% endcomment %}
+
+    <div class="contact-info-section">
+        <h2>Need Immediate Assistance?</h2>
+
+        <div class="contact-details">
+            <div class="contact-item">
+                <div class="contact-item-icon">📞</div>
+                <a href="tel:{{ contact.phone }}">{{ contact.phone }}</a>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-item-icon">📧</div>
+                <a href="mailto:{{ contact.email }}">{{ contact.email }}</a>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-item-icon">💬</div>
+                <a href="https://wa.me/{{ contact.whatsapp }}">WhatsApp Us</a>
+            </div>
+        </div>
+
+        <p style="margin-top: 30px; font-size: 14px; color: #999;">
+            Office Hours: {{ contact.office_hours }}
+        </p>
+    </div>
+</div>
+    <script>
+        const hamburger = document.querySelector(".hamburger");
+        const navbar = document.querySelector(".navbar");
+
+        function toggleMenu() {
+            hamburger.classList.toggle("active");
+            navbar.classList.toggle("active");
+        }
+
+    </script>
+    {% include 'footer.html' %}
+    </body>
+
+    </html>

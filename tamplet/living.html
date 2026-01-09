@@ -1,0 +1,173 @@
+<!-- Messages -->
+{% if success %}
+<script style="color: green;">
+    alert("✅ Your enquiry has been submitted successfully!");
+</script>
+{% endif %}
+
+{% if error %}
+<script style="color: red;">
+    alert("❌ {{ error }}");
+</script>
+{% endif %}
+
+
+{% include 'header.html' %}
+<style>
+:root {
+        --backg-image: url('{{ main.back_image.url }}');
+      }
+</style> 
+<!-----------------Image animations and carousel------------------>
+<div class="anim">
+    <div class="container">
+        <a class="landing img"><img src="/static/images/logo6.png" alt="Landing Image, responsive design" /></a>
+        {% if main %}
+        <h1 class="head">{{ main.main_title }}</h1>
+        <p class="para">{{ main.para1 }}</p>
+        <p class="para1">{{ main.para2 }}</p>
+        {% endif %}
+    </div>
+</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<div id="carouselExampleCaptions" class="carousel slide" style=" width: 95%; margin: 11px auto;"
+    data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+            aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+            aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+            aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner" style="align-items: center;">
+      {% for slide in slides %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            <img src="{{ slide.Carousel_image.url }}" class="d-block w-100" style="border-radius: 8px;" alt="..." height="260"
+                width="700">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>{{ slide.slide_label }}</h5>
+                <p>{{ slide.content }}</p>
+            </div>
+        </div>
+        {% endfor %} 
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<section class="core-section">
+
+  <div class="core-container">
+
+    <!-- LEFT : Core Values Circle -->
+    <div class="core-left">
+
+      <div class="core-circle">
+        <span class="core-small">CORE VALUES</span>
+        <h2>QC-FIRST</h2>
+      </div>
+
+      <ul class="core-points">
+         {% for value in core_values %}
+        <li><span></span>{{ value.title }}</li>
+        {% endfor %}
+      </ul>
+
+    </div>
+
+    <!-- RIGHT : Mission & Vision -->
+    <div class="core-right">
+
+      <div class="mission">
+        <h3>MISSION</h3>
+        <p>
+          {{ mv.mission }}
+        </p>
+      </div>
+
+      <hr>
+
+      <div class="vision">
+        <h3>VISION</h3>
+        <p>
+          {{ mv.vision }}
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+<!---------------------------------- Overview Section ---------------------------------->
+<section class="overview-section">
+  <h2 class="overview-title">......OVERVIEW......</h2>
+
+  <div class="overview-content">
+    <!-- Left stats -->
+    <div class="overview-stats">
+
+      <div class="stat-item">
+        <span class="stat-number">{{ overview.apartments }}</span>
+        <span class="stat-label">Apartments</span>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="stat-item">
+        <span class="stat-number">{{ overview.bhk_types }}</span>
+        <span class="stat-label">BHK Homes</span>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="stat-item">
+        <span class="stat-number">{{ overview.towers }}</span>
+        <span class="stat-label">Towers</span>
+      </div>
+
+    </div>
+
+    <!-- Right description -->
+    <div class="overview-text">
+      <p>
+        {{ overview.description }}
+      </p>
+    </div>
+  </div>
+</section>
+<section class="map-section">
+  <h2 class="map-title">FIND US ON THE MAP</h2>
+  <div class="map-wrapper">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d497698.77489487146!2d77.30124752310827!3d12.954459548453066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1767512230701!5m2!1sen!2sin" width="1100" height="350" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+</section>
+  <h2 style="text-align: center; color: #6b3f55;">......OUR STATS......</h2>
+<section class="people">
+<div class="stats-wrapper">
+    {% for stat in stats %}
+    <div class="stat-cards">
+        <div class="icon">
+            {{ stat.icon }}
+        </div>
+        <h4>{{ stat.title }}</h4>
+        <h2>{{ stat.value }}</h2>
+        <p>{{ stat.subtitle }}</p>
+    </div>
+    {% endfor %}
+</div>
+  </section>
+<!--------------------------------footer of this page -------------------------------->
+{% include 'footer.html' %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous">
+</script>
+
+</body>
+</html>

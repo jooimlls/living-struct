@@ -1,0 +1,246 @@
+{% include 'header.html' %}
+    <style>
+:root {
+        --bg-image: url('{{ property.main_card_image.url }}');
+      }
+  </style>
+ <script>
+   // Declare hamburger FIRST
+const hamburger = document.querySelector(".hamburger");
+const navbar = document.querySelector(".navbar");
+
+// Then you can log it
+console.log("Hamburger element:", hamburger);
+
+function toggleMenu() {
+  hamburger.classList.toggle("active");
+  navbar.classList.toggle("active");
+}
+
+function openPopup() {
+  document.getElementById("popup").style.display = "flex";
+}
+
+function closePopup() {
+  document.getElementById("popup").style.display = "none";
+}
+
+// Optional: Close popup by clicking outside the box
+window.onclick = function(e) {
+  const popup = document.getElementById("popup");
+  if (e.target === popup) {
+    popup.style.display = "none";
+  }
+}
+
+document.addEventListener("click", (e) => {
+  document.querySelectorAll(".dropdown.open").forEach(drop => {
+    if (!drop.contains(e.target)) drop.classList.remove("open");
+  });
+});
+</script> 
+  <!-------------------------------- Button to open popup ---------------------------------------->
+<!-- Popup Overlay -->
+  <!--------------------- Landing Page Section ------------------------------>
+
+  <div style="padding-top: 100px; padding-bottom: 40px;">
+    <section class="anima" alt="responsive design">
+    <div class="content">
+      <h1 class="fade-in-text">{{ property.welcome_title }}</h1>
+      <p class="slide-up">{{ property.welcome_subtitle }}</p>
+      <a href="#details" class="button pop-in">Explore More ↓</a>
+      <section id="details" class="details">
+      </section>
+    </div>
+    <div class="image fade-in-image">
+      {% if property.landing_image %}
+        <img src="{{ property.landing_image.url }}" alt="{{ property.title }}">
+      {% else %}
+        <img src="/static/images/logo10.png" alt="Landing Image, responsive">
+      {% endif %}
+    </div>
+  </section>
+  </div>
+  
+  <!--------------------- Banner Section ------------------------>
+<div class="banner-container" alt="responsive">
+  <section class="banner">
+
+    <!-- LEFT COLUMN -->
+    <div class="column">
+        <p class="units">{{ property.bhk_type_1 }} Units</p>
+
+        <div class="divider"></div>
+
+        <p class="info">{{ property.bhk_units_1 }}</p>
+        <p class="info">{{ property.bhk_size_1 }}</p>
+        <div class="divider"></div>
+
+        <p class="price">Price: {{ property.bhk_price_1 }}</p>
+    </div>
+
+    <!-- CENTER LOGO -->
+    <div class="center">
+        {% if property.main_card_image %}
+          <img src="{{ property.landing_image.url }}" alt="{{ property.title }}" class="logo">
+        {% else %}
+          <img src="/static/images/sakura-logo.png" alt="{{ property.title }}" class="logo">
+        {% endif %}
+
+        <p class="land">{{ property.land_parcel }}</p>
+
+        <p class="location">{{ property.location }}</p>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="column">
+        <p class="units">{{ property.bhk_type_2}} Units</p>
+
+        <div class="divider"></div>
+
+        <p class="info">{{ property.bhk_units_2 }}</p>
+        <p class="info">{{ property.bhk_size_2 }}</p>
+        <div class="divider"></div>
+
+        <p class="price">Price: {{ property.bhk_price_2 }}</p>
+    </div>
+
+</section>
+</div>
+
+  <!--------------------- Description ------------------------>
+
+  {% if property.description_para1 %}
+  <p class="para3" style="margin-top: -60px;">{{ property.description_para1 }}</p>
+  {% endif %}
+
+  {% if property.description_para2 %}
+  <p class="para3">{{ property.description_para2 }}</p>
+  {% endif %}
+
+  <!-- --------------Highlights ---------------------->
+
+  {% if property.highlights %}
+  <section class="highlights" style="margin-top: 20px; padding-left: 20px; font-family: 'Times New Roman', Times, serif;">
+    <h2>Project Highlights</h2>
+    <ul>
+      {% for highlight in property.get_highlights_list %}
+        <li>{{ highlight }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  <!-- --------------Specifications ---------------------->
+
+  {% if property.specifications.all %}
+  <div class="specs-container" alt="responsive">
+    <h1 style="margin-top: 20px;">The Specifications</h1>
+
+    <div class="specs-grid" alt="responsive">
+      {% for spec in property.specifications.all %}
+      <div class="spec-section">
+        <h3>{{ spec.category }}</h3>
+        <ul>
+          {% for detail in spec.get_details_list %}
+            <li>{{ detail }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- ------------------------ Image Carousel ---------------------------->
+  {% if property.gallery_images.all %}
+  <div class="carousel-bg" alt="responsive">
+    <div class="carousel-container" alt="responsive">
+      <button class="prev">&#10094;</button>
+      <div class="carousel-track">
+        {% for image in property.gallery_images.all %}
+        <div class="item">
+          <a href="{{ image.image.url }}">
+            <img src="{{ image.image.url }}" alt="{{ image.caption }}">
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+      <button class="next">&#10095;</button>
+    </div>
+  </div>
+
+  <script>
+    const track = document.querySelector('.carousel-track');
+    const items = document.querySelectorAll('.item');
+    const next = document.querySelector('.next');
+    const prev = document.querySelector('.prev');
+
+    let index = 0;
+    const visibleSlides = 3;
+
+    function updateCarousel() {
+      track.style.transform = `translateX(-${index * (100 / visibleSlides)}%)`;
+    }
+
+    next.addEventListener('click', () => {
+      if (index < items.length - visibleSlides) index++;
+      else index = 0;
+      updateCarousel();
+    });
+
+    prev.addEventListener('click', () => {
+      if (index > 0) index--;
+      else index = items.length - visibleSlides;
+      updateCarousel();
+    });
+
+    setInterval(() => {
+      if (index < items.length - visibleSlides) index++;
+      else index = 0;
+      updateCarousel();
+    }, 4000);
+  </script>
+  {% endif %}
+
+  <!------------------------------ Video -------------------------------->
+
+  {% if property.video_file %}
+  <section class="video-section" alt="responsive">
+    <video controls>
+      <source src="{{ property.video_file.url }}" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+
+    <div class="video-text">
+      <h2>{{ property.video_title }}</h2>
+      <p>{{ property.video_description }}</p>
+    </div>
+  </section>
+  {% endif %}
+
+  <!------------------------ Features & Amenities ------------------------>
+
+  {% if property.amenities.all %}
+  <section class="features">
+    <h2>Features & Amenities</h2>
+    <div class="features-grid">
+      {% for amenity in property.amenities.all %}   
+      <div class="feature-box">
+       <div class="icon">{{ amenity.icon }}</div>
+       <p>{{ amenity.name }}</p>
+      </div>  
+{% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <!------------------------------ Footer -------------------------------->
+{% include 'footer.html' %}
+
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+
+</body> 
+</html>

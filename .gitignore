@@ -1,0 +1,19 @@
+# Django media
+media/
+
+# Static uploads (videos, heavy files)
+static/images/*.mp4
+
+# Database
+db.sqlite3
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtual env
+venv/
+.env
+
+# Collected static
+staticfiles/

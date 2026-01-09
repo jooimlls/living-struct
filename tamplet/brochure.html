@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Brochures</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+        }
+        
+        .brochure-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .brochure-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .brochure-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+        
+        .brochure-thumbnail {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3em;
+        }
+        
+        .brochure-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .brochure-content {
+            padding: 20px;
+        }
+        
+        .brochure-title {
+            font-size: 1.3em;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .brochure-description {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .brochure-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            color: #999;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 600;
+            transition: opacity 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            opacity: 0.9;
+        }
+        
+        .download-icon {
+            margin-right: 8px;
+        }
+        
+        .no-brochures {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📄 Download Our Brochures</h1>
+        
+        {% if brochures %}
+        <div class="brochure-grid">
+            {% for brochure in brochures %}
+            <div class="brochure-card">
+                <div class="brochure-thumbnail">
+                    {% if brochure.thumbnail %}
+                        <img src="{{ brochure.thumbnail.url }}" alt="{{ brochure.title }}">
+                    {% else %}
+                        📑
+                    {% endif %}
+                </div>
+                
+                <div class="brochure-content">
+                    <h3 class="brochure-title">{{ brochure.title }}</h3>
+                    
+                    {% if brochure.description %}
+                    <p class="brochure-description">{{ brochure.description|truncatewords:20 }}</p>
+                    {% endif %}
+                    
+                    <div class="brochure-meta">
+                        <span>📅 {{ brochure.uploaded_at|date:"M d, Y" }}</span>
+                        <span>⬇️ {{ brochure.download_count }} downloads</span>
+                    </div>
+                    
+                    <a href="{% url 'download_brochure' brochure.pk %}" class="download-btn">
+                        <span class="download-icon">⬇️</span>
+                        Download PDF
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="no-brochures">
+            <p>No brochures available at the moment.</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

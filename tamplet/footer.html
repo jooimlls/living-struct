@@ -1,0 +1,73 @@
+<footer class="footer">
+  {% if footer %}
+  <div class="footer-container">
+
+    <!-- Column 1 -->
+    <div class="footer-section">
+      <img src="/static/images/logo6.png" alt="Logo" class="footer-logo">
+      <p>{{ footer.tagline }}</p>
+
+      <div class="social-media">
+        <h4>Follow Us</h4>
+        <div class="social-icons">
+
+          {% if footer.facebook_url %}
+          <a href="{{ footer.facebook_url }}" target="_blank" class="social-icon facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          {% endif %}
+
+          {% if footer.instagram_url %}
+          <a href="{{ footer.instagram_url }}" target="_blank" class="social-icon instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          {% endif %}
+
+          {% if footer.twitter_url %}
+          <a href="{{ footer.twitter_url }}" target="_blank" class="social-icon twitter">
+            <i class="fab fa-x-twitter"></i>
+          </a>
+          {% endif %}
+
+          {% if footer.linkedin_url %}
+          <a href="{{ footer.linkedin_url }}" target="_blank" class="social-icon linkedin">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Column 2 -->
+    <div class="footer-section">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="{% url 'Home' %}">Home</a></li>
+        <li><a href="{% url 'Enquire_About:About' %}">About Us</a></li>
+        <li><a href="{% url 'Cards' %}">Our Projects</a></li>
+        <li><a href="{% url 'brochure_list' %}">Download Brochure</a></li>
+        <li><a href="{% url 'Enquire_About:Enquire' %}">Enquire Now</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 3 -->
+    <div class="footer-section contact-info">
+      <h4>Contact Us</h4>
+      <p><i class="fas fa-envelope"></i> {{ footer.Footer_email }}</p>
+      <p><i class="fas fa-phone"></i> {{ footer.Footer_phone }}</p>
+      <p><i class="fas fa-map-marker-alt"></i> {{ footer.Footer_location }}</p>
+
+      <h5>Our Team Members</h5>
+      {% for member in footer.get_team_members_list %}
+        <p>{{ member }}</p>
+      {% endfor %}
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© {{ now|date:"Y" }} Living Structures. All rights reserved.</p>
+  </div>
+  {% endif %}
+</footer>

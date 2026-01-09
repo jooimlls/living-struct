@@ -1,0 +1,612 @@
+{% include 'header.html' %}
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f8f9fa;
+    }
+
+    .who-we-are-section {
+        padding: 60px 0;
+        background-color: #ffffff;
+    }
+
+    .section-label {
+        color: #573548;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+        position: relative;
+        padding-left: 60px;
+        padding-top: 70px;
+    }
+
+    .section-label::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 50px;
+        height: 2px;
+        background: linear-gradient(to right, transparent, #573548);
+        margin: 36px;
+    }
+
+    .main-heading {
+        color: #573548;
+        font-size: 42px;
+        font-weight: 700;
+        line-height: 1.3;
+        margin-bottom: 40px;
+    }
+
+    .image-container {
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .interior-image {
+        width: 100%;
+        height: auto;
+        border-radius: 20px;
+    }
+
+    .building-image {
+        width: 100%;
+        height: auto;
+        border-radius: 15px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        margin-bottom: 30px;
+    }
+
+    .vision-section h3,
+    .mission-section h3,
+    .philosophy-section h3 {
+        color: #573548;
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .vision-section p,
+    .mission-section p,
+    .philosophy-section p {
+        color: #6c757d;
+        font-size: 16px;
+        line-height: 1.8;
+        margin-bottom: 30px;
+    }
+
+    .scroll-top-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        background-color: #ffffff;
+        border: 2px solid #988f94ff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+
+    .scroll-top-btn:hover {
+        background-color: #573548;
+        transform: translateY(-5px);
+    }
+
+    .scroll-top-btn:hover svg {
+        stroke: #ffffff;
+    }
+
+    .why-choose-section {
+        padding: 80px 0;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        position: relative;
+    }
+
+    .why-choose-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(0,102,178,0.03)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        opacity: 0.5;
+    }
+
+    .why-choose-heading {
+        color: #573548;
+        font-size: 48px;
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .feature-card {
+        background: white;
+        border-radius: 15px;
+        padding: 35px 30px;
+        height: 100%;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 1;
+        border: 1px solid rgba(0, 102, 178, 0.1);
+    }
+
+    .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(0, 102, 178, 0.15);
+    }
+
+    .icon-wrapper {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #0066b2 0%, #004c87 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 25px;
+        box-shadow: 0 5px 15px rgba(0, 102, 178, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    .feature-card:hover .icon-wrapper {
+        transform: scale(1.1) rotate(5deg);
+    }
+
+    .feature-title {
+        color: #573548;
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 15px;
+        line-height: 1.3;
+    }
+
+    .feature-description {
+        color: #6c757d;
+        font-size: 15px;
+        line-height: 1.7;
+        margin: 0;
+    }
+
+    @media (max-width: 768px) {
+        .main-heading {
+            font-size: 28px;
+        }
+
+        .vision-section h3,
+        .mission-section h3,
+        .philosophy-section h3 {
+            font-size: 22px;
+        }
+
+        .why-choose-heading {
+            font-size: 32px;
+        }
+
+        .feature-title {
+            font-size: 20px;
+        }
+    }
+
+    * {
+        box-sizing: border-box;
+        font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    /* SECTION BACKGROUND */
+    .team {
+        padding: 90px 20px;
+        text-align: center;
+        background: #f2f7fc;
+    }
+
+    /* TITLE */
+    .section-title {
+        font-size: 42px;
+        color: #573548;
+        margin-bottom: 60px;
+    }
+
+    /* GRID */
+    .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 40px;
+        justify-content: center;
+    }
+
+    /* CARD */
+    .team-member {
+        position: relative;
+        background: #ffffff;
+        padding: 26px 22px;
+        border-radius: 22px;
+        border: 1px solid #dbe7f3;
+        /* subtle border */
+        transition: transform 0.3s ease;
+        width: 400px
+    }
+
+    .team-member:hover {
+        transform: translateY(-6px);
+    }
+
+    /* === FOLD EDGE (PAPER CORNER) === */
+    .team-member::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 34px;
+        height: 34px;
+        background: linear-gradient(135deg,
+                #ffffff 50%,
+                #e6eef7 50%);
+        border-bottom-left-radius: 10px;
+        box-shadow: -2px 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    /* IMAGE */
+    .image-wrap {
+        border-radius: 18px;
+        overflow: hidden;
+        margin-bottom: 18px;
+    }
+
+    .image-wrap img {
+        width: 100%;
+        height: 240px;
+        object-fit: cover;
+    }
+
+    /* TEXT */
+    .team-member h4 {
+        font-size: 20px;
+        color: #573548;
+        margin-bottom: 4px;
+    }
+
+    .role {
+        font-size: 14px;
+        color: #666;
+    }
+
+    /* ARROW */
+    .toggle-btn {
+        margin: 14px auto 0;
+        background: none;
+        border: none;
+        font-size: 26px;
+        cursor: pointer;
+        color: #573548;
+        animation: bounce 2s infinite;
+        transition: transform 0.4s ease;
+    }
+
+    .toggle-btn.rotate {
+        animation: none;
+        transform: rotate(180deg);
+    }
+
+    /* ARROW BOUNCE */
+    @keyframes bounce {
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(6px);
+        }
+    }
+
+    /* === PAPER DROP / CURTAIN === */
+    .member-details {
+        background: #f8fbff;
+        border-radius: 16px;
+        margin-top: 18px;
+        padding: 0 18px;
+
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(-14px);
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+
+        transition:
+            max-height 0.6s ease,
+            opacity 0.4s ease,
+            transform 0.4s ease,
+            box-shadow 0.4s ease;
+    }
+
+    .member-details p {
+        margin: 18px 0;
+        font-size: 14px;
+        line-height: 1.6;
+        color: #444;
+    }
+
+    /* OPEN STATE */
+    .member-details.open {
+        max-height: 320px;
+        opacity: 1;
+        transform: translateY(0);
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.08);
+    }
+
+    /* MOBILE */
+    @media (max-width: 600px) {
+        .section-title {
+            font-size: 32px;
+        }
+    }
+
+    * {
+        border-color: transparent !important;
+    }
+</style>
+</head>
+
+<body>
+    <section class="who-we-are-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-label">&nbsp;&nbsp;&nbsp; &nbsp; {{ who.label }}</div>
+                </div>
+            </div>
+
+            <div class="row align-items-start">
+                <div class="col-lg-5 mb-4">
+                    {% if who.top_image.url %}
+                    <img src="{{ who.top_image.url }}" class="interior-image">
+                    {% else %}
+                    <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=500" alt="Luxury Interior"
+                        class="interior-image">
+                    {% endif %}
+                </div>
+
+                <div class="col-lg-7">
+                    <h1 class="main-heading">
+                        {{ who.heading }}
+                    </h1>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-lg-6 mb-4">
+                    {% if who.bottom_image.url %}
+                    <img src="{{ who.bottom_image.url }}" class="building-image">
+                    {% else %}
+                    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800" alt="Modern Building"
+                        class="building-image">
+                    {% endif %}
+                </div>
+                <!---------------------Vision / Mission / Philosophy Section------------------>
+                <div class="col-lg-6">
+                    {% for block in about_blocks %}
+                    <div class="{{ block.css_class }}">
+                        <h3>{{ block.title }}</h3>
+                        <p>{{ block.description }}</p>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="why-choose-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p style="color: #573548;">...... WHY CHOOSE US ......</p>
+                    <h2 class="why-choose-heading">Why To Choose<br>Living Structures</h2>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <!-- Card 1: Greener Communities -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card">
+                        <div class="icon-wrapper">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Greener Communities</h3>
+                        <p class="feature-description">With Miyawaki forests, vertical gardens, tree-lined avenues, and
+                            landscaped courtyards, we create open spaces designed to nurture well-being.</p>
+                    </div>
+                </div>
+
+                <!-- Card 2: Nature-Inspired Design -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card">
+                        <div class="icon-wrapper">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Nature-Inspired Design</h3>
+                        <p class="feature-description">Our homes are designed with natural light, cross-ventilation, and
+                            energy efficiency, built using sustainable, environment-friendly materials and finishes.</p>
+                    </div>
+                </div>
+
+                <!-- Card 3: International Standards -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card">
+                        <div class="icon-wrapper">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path
+                                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                                </path>
+                                <path d="M2 12h20"></path>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">International Standards</h3>
+                        <p class="feature-description">By adopting global best practices in design, planning, and
+                            execution, we integrate smart infrastructure with water recycling, renewable energy, and
+                            efficient waste management.</p>
+                    </div>
+                </div>
+
+                <!-- Card 4: Human-Centric Living -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card">
+                        <div class="icon-wrapper">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <circle cx="18" cy="7" r="2"></circle>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Human-Centric Living</h3>
+                        <p class="feature-description">With walkable layouts, wellness-driven amenities, and vibrant
+                            community spaces, we create homes that support families and inspire future generations.</p>
+                    </div>
+                </div>
+
+                <!-- Card 5: Smart & Sustainable Design -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card">
+                        <div class="icon-wrapper">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Smart & Sustainable Design</h3>
+                        <p class="feature-description">Homes designed with natural light, cross-ventilation, and energy
+                            efficiency, built using sustainable and environment-friendly materials.</p>
+                    </div>
+                </div>
+
+                <!-- Card 6: Green & Wellness Spaces -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card">
+                        <div class="icon-wrapper">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                                <path d="M2 17l10 5 10-5"></path>
+                                <path d="M2 12l10 5 10-5"></path>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Green & Wellness Spaces</h3>
+                        <p class="feature-description">Miyawaki forests, vertical gardens, tree-lined avenues, and
+                            landscaped courtyards create open spaces designed for well-being.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="team">
+            <h2 class="section-title">Our Team</h2>
+
+            <div class="row team-grid">
+
+                {% for member in team %}
+                <div class="team-member">
+                    <div class="image-wrap">
+                        <img src="{{ member.image.url }}" alt="{{ member.name }}">
+                    </div>
+
+                    <h4>{{ member.name }}</h4>
+                    <p class="role">{{ member.role }}</p>
+
+                    <button class="toggle-btn">↓</button>
+
+                    <div class="member-details">
+                        <p>{{ member.bio }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+    <div class="scroll-top-btn" onclick="scrollToTop()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0066b2" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        window.addEventListener('scroll', function () {
+            const scrollBtn = document.querySelector('.scroll-top-btn');
+            if (window.pageYOffset > 300) {
+                scrollBtn.style.display = 'flex';
+            } else {
+                scrollBtn.style.display = 'none';
+            }
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            const buttons = document.querySelectorAll(".toggle-btn");
+
+            buttons.forEach((btn) => {
+                btn.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    const currentDetails = this.nextElementSibling;
+
+                    // Close all other cards
+                    document.querySelectorAll(".member-details").forEach((detail) => {
+                        if (detail !== currentDetails) {
+                            detail.classList.remove("open");
+                        }
+                    });
+
+                    document.querySelectorAll(".toggle-btn").forEach((b) => {
+                        if (b !== this) {
+                            b.classList.remove("rotate");
+                        }
+                    });
+
+                    // Toggle current
+                    currentDetails.classList.toggle("open");
+                    this.classList.toggle("rotate");
+                });
+            });
+        });
+
+    </script>
+    {% include 'footer.html' %}
+</body>
+
+</html>
