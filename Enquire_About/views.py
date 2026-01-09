@@ -13,7 +13,7 @@ def enquire(request):
         'steps': Step.objects.all(),
         'contact': ContactInfo.objects.first(),
     }
-    return render(request, 'Enquire.html', context)
+    return render(request, 'enquire.html', context)
 
 
 # def enquire(request):
