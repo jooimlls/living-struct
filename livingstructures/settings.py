@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,8 +24,7 @@ SECRET_KEY = 'django-insecure-59j(sx5z#^8(*whx9-^mve8u2pn2rm4tzm$@#fk^&=#5w9&5xm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['living-structure.onrender.com', 'localhost', '127.0.0.1']
-
+ALLOWED_HOSTS = ['living.pythonanywhere.com', 'living-structure.onrender.com', 'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -37,6 +35,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'cloudinary',
+    'cloudinary_storage',
     'accounts',
     'cards',
     'brochure',
@@ -132,14 +133,26 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",  
+    BASE_DIR / "static",
 ]
-
+from dotenv import load_dotenv
+import os
+load_dotenv()
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME':os.getenv( 'dhgzf5p5s'),
+    'API_KEY': os.getenv('252759411793242'),
+    'API_SECRET': os.getenv('HZhyko9fW5Bm8pzlU-n8Gdh-NGw')
+}
+
+# Media files (uploads)
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+
 
 
 
